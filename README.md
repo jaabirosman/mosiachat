@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="https://telegra.ph/file/fed9ba09e9add9b197c21.png">
+  <img src="https://telegra.ph/file/abe2032b564ca84c4fdc5.jpg">
 <p>
 
 <h1 align="center">
-    Zeldris Robot
+    Ribaj Robot
 </h1>
 
 <p align="center">
