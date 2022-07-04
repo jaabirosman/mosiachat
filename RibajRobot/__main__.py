@@ -57,12 +57,12 @@ from zeldris import (
 
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
-from zeldris.modules import ALL_MODULES
-from zeldris.modules.disable import DisableAbleCommandHandler
-from zeldris.modules.helper_funcs.chat_status import is_user_admin
-from zeldris.modules.helper_funcs.misc import paginate_modules
-from zeldris.modules.purge import client
-from zeldris.modules.sql import users_sql as sql
+from ribajrobot.modules import ALL_MODULES
+from ribajrobot.modules.disable import DisableAbleCommandHandler
+from ribajrobot.modules.helper_funcs.chat_status import is_user_admin
+from ribajrobot.modules.helper_funcs.misc import paginate_modules
+from ribajrobot.modules.purge import client
+from ribajrobot.modules.sql import users_sql as sql
 
 
 def get_readable_time(seconds: int) -> str:
