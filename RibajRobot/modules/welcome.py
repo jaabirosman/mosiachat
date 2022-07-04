@@ -113,16 +113,16 @@ def send(update, message, keyboard, backup_message):
                 markdown_parser(
                     (
                         backup_message
-                        + "\nNote: the current message has an invalid url in one of its buttons. Please update."
+                        + "\nFiiro gaar ah: fariinta hadda waxay leedahay url aan ansax ahayn mid ka mid ah badhamada. Fadlan cusbooneysii."
                     )
                 ),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_to_message_id=reply,
             )
 
-        elif excp.message == "Have no rights to send a message":
+        elif excp.message == "Xaq uma lihid inaad fariin dirto":
             return
-        elif excp.message == "Reply message not found":
+        elif excp.message == "Fariinta jawaabta lama helin":
             msg = update.effective_message.reply_text(
                 message,
                 parse_mode=ParseMode.MARKDOWN,
@@ -130,13 +130,13 @@ def send(update, message, keyboard, backup_message):
                 quote=False,
             )
 
-        elif excp.message == "Unsupported url protocol":
+        elif excp.message == "Hab-maamuuska url ee aan la taageerin":
             msg = update.effective_message.reply_text(
                 markdown_parser(
                     (
                         backup_message
-                        + "\nNote: the current message has buttons which use url protocols that are unsupported by "
-                        "telegram. Please update. "
+                        + "\nFiiro gaar ah: fariinta hadda waxa ay leedahay badhammo adeegsada borotokoolka url ee aanay taageerin "
+                        "telegram. Fadlan cusbooneysii. "
                     )
                 ),
                 parse_mode=ParseMode.MARKDOWN,
@@ -148,7 +148,7 @@ def send(update, message, keyboard, backup_message):
                 markdown_parser(
                     (
                         backup_message
-                        + "\nNote: the current message has some bad urls. Please update."
+                        + "\nFiiro gaar ah: fariinta hadda waxay leedahay url xun. Fadlan cusbooneysii."
                     )
                 ),
                 parse_mode=ParseMode.MARKDOWN,
@@ -157,13 +157,13 @@ def send(update, message, keyboard, backup_message):
 
             LOGGER.warning(message)
             LOGGER.warning(keyboard)
-            LOGGER.exception("Could not parse! got invalid url host errors")
+            LOGGER.exception("Waa la kala saari kari waayay! waxay heshay khaladaad martigeliyaha url aan sax ahayn")
         else:
             msg = update.effective_message.reply_text(
                 markdown_parser(
                     (
                         backup_message
-                        + "\nNote: An error occured when sending the custom message. Please update."
+                        + "\nXusuusin: Khalad ayaa dhacay markii la dirayey fariinta caadada ah Fadlan cusbooneysii."
                     )
                 ),
                 parse_mode=ParseMode.MARKDOWN,
@@ -216,20 +216,20 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
                 update.effective_message.reply_text(
-                    "My Owner in the house Let's party 🎉",
+                    "Mulkiilahayga guriga Aan xafladaynno 🎉",
                     reply_to_message_id=reply,
                 )
                 welcome_log = (
                     f"{html.escape(chat.title)}\n"
                     f"#USER_JOINED\n"
-                    f"Bot Owner just joined the chat"
+                    f"Mulkiilaha Botka ayaa hadda ku soo biiray Group Kaan"
                 )
                 continue
 
             # Welcome Devs
             if new_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
-                    "My Dev Here, let's see what happened now 🔥",
+                    "My Dev Halkan, aan aragno waxa dhacay hadda 🔥",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -237,8 +237,8 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             # Welcome yourself
             if new_mem.id == bot.id:
                 update.effective_message.reply_text(
-                    "Hey {}, I'm {}! Thank you for adding me to {}\n"
-                    "Join support and channel update with clicking button below!".format(
+                    "haye {}, waxaan ahay {}! Waad ku mahadsan tahay inaad igu dartay {}\n"
+                    "Ku biir taageerada iyo cusboonaysiinta kanaalka adigoo gujinaya badhanka hoose!".format(
                         user.first_name, context.bot.first_name, chat.title
                     ),
                     reply_to_message_id=reply,
@@ -246,10 +246,10 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="☎️ Support", url="https://t.me/IDNCoderX"
+                                    text="🦅 Support", url="https://t.me/osmanigroupbot"
                                 ),
                                 InlineKeyboardButton(
-                                    text="Updates 📡", url="https://t.me/IDNCoder"
+                                    text="Updates 🦅", url="https://t.me/teamosmani"
                                 ),
                             ]
                         ],
@@ -377,12 +377,12 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                     f"[{escape_markdown(new_mem.first_name)}](tg://user?id={user.id})"
                 )
                 message = msg.reply_text(
-                    f"{new_join_mem}, click the button below to prove you're human.\nYou have 120 seconds.",
+                    f"{new_join_mem}, dhagsii badhanka hoose si aad u caddayso inaad tahay bini'aadam.\nWaxaad haysataa 120 ilbiriqsi.",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             {
                                 InlineKeyboardButton(
-                                    text="Yes, I'm human.",
+                                    text="Haa, waxaan ahay bini'aadam.",
                                     callback_data=f"user_join_({new_mem.id})",
                                 )
                             }
@@ -721,18 +721,18 @@ def welcome(update: Update, context: CallbackContext):
         if args[0].lower() in ("on", "yes"):
             sql.set_welc_preference(str(chat.id), True)
             update.effective_message.reply_text(
-                "Okay! I'll greet members when they join."
+                "Hagaag! Waan salaamayaa xubnaha marka ay ku soo biiraan."
             )
 
         elif args[0].lower() in ("off", "no"):
             sql.set_welc_preference(str(chat.id), False)
             update.effective_message.reply_text(
-                "I'll go loaf around and not welcome anyone then."
+                "Waan soo wareegayaa oo qofna ma soo dhaweyn doono markaa."
             )
 
         else:
             update.effective_message.reply_text(
-                "I understand 'on/yes' or 'off/no' only!"
+                "waan fahmay 'on/yes' or 'off/no' kaliya!"
             )
 
 
@@ -745,7 +745,7 @@ def goodbye(update: Update, context: CallbackContext):
         noformat = True
         pref, goodbye_m, goodbye_type = sql.get_gdbye_pref(chat.id)
         update.effective_message.reply_text(
-            f"This chat has it's goodbye setting set to: `{pref}`.\n"
+            f"Sheekadan waxay leedahay habayn nabad gelyo oo loo dejiyay: `{pref}`.\n"
             f"*The goodbye  message (not filling the {{}}) is:*",
             parse_mode=ParseMode.MARKDOWN,
         )
@@ -796,17 +796,17 @@ def set_welcome(update: Update, _) -> str:
     text, data_type, content, buttons = get_welcome_type(msg)
 
     if data_type is None:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("Ma aadan cayimin waxaad kaga jawaabto!")
         return ""
 
     sql.set_custom_welcome(chat.id, content, text, data_type, buttons)
-    msg.reply_text("Successfully set custom welcome message!")
+    msg.reply_text("Si guul leh u deji fariinta soo dhawaynta ee caadada u ah!")
 
     return (
         f"<b>{html.escape(chat.title)}:</b>\n"
         f"#SET_WELCOME\n"
         f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"Set the welcome message."
+        f"Dhig fariinta soo dhawaynta."
     )
 
 
@@ -818,14 +818,14 @@ def reset_welcome(update: Update, _) -> str:
 
     sql.set_custom_welcome(chat.id, None, sql.DEFAULT_WELCOME, sql.Types.TEXT)
     update.effective_message.reply_text(
-        "Successfully reset welcome message to default!"
+        "Si guul leh dib ugu dejiso fariinta soo dhawaynta!"
     )
 
     return (
         f"<b>{html.escape(chat.title)}:</b>\n"
         f"#RESET_WELCOME\n"
         f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"Reset the welcome message to default."
+        f"Ku celi fariinta soo dhawaynta si ay u noqoto mid habaysan."
     )
 
 
@@ -838,16 +838,16 @@ def set_goodbye(update: Update, _) -> str:
     text, data_type, content, buttons = get_welcome_type(msg)
 
     if data_type is None:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("Ma aadan cayimin waxaad kaga jawaabi lahaydh!")
         return ""
 
     sql.set_custom_gdbye(chat.id, content or text, data_type, buttons)
-    msg.reply_text("Successfully set custom goodbye message!")
+    msg.reply_text("Si guul leh u deji fariinta macasalaamaynta caadada!")
     return (
         f"<b>{html.escape(chat.title)}:</b>\n"
         f"#SET_GOODBYE\n"
         f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"Set the goodbye message."
+        f"Dhig fariinta macasalaamaynta."
     )
 
 
@@ -859,14 +859,14 @@ def reset_goodbye(update: Update, _) -> str:
 
     sql.set_custom_gdbye(chat.id, sql.DEFAULT_GOODBYE, sql.Types.TEXT)
     update.effective_message.reply_text(
-        "Successfully reset goodbye message to default!"
+        "Si guul leh dib ugu deji fariinta macasalaamaynta oo u dhigma!"
     )
 
     return (
         f"<b>{html.escape(chat.title)}:</b>\n"
         f"#RESET_GOODBYE\n"
         f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"Reset the goodbye message."
+        f"Dib u habayn dhambaalka nabad gelyada."
     )
 
 
@@ -881,7 +881,7 @@ def welcomemute(update: Update, context: CallbackContext) -> str:
     if len(args) >= 1:
         if args[0].lower() in ("off", "no"):
             sql.set_welcome_mutes(chat.id, False)
-            msg.reply_text("I will no longer mute people on joining!")
+            msg.reply_text("Hadda ka dib kama aamusi doono dadka ku biirista!")
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"#WELCOME_MUTE\n"
@@ -891,7 +891,7 @@ def welcomemute(update: Update, context: CallbackContext) -> str:
         if args[0].lower() in ["soft"]:
             sql.set_welcome_mutes(chat.id, "soft")
             msg.reply_text(
-                "I will restrict users' permission to send media for 24 hours."
+                "Waxaan xaddidi doonaa oggolaanshaha isticmaalayaasha si ay u soo diraan warbaahinta 24 saacadood."
             )
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
@@ -902,8 +902,8 @@ def welcomemute(update: Update, context: CallbackContext) -> str:
         if args[0].lower() in ["strong"]:
             sql.set_welcome_mutes(chat.id, "strong")
             msg.reply_text(
-                "I will now mute people when they join until they prove they're not a bot.\nThey will have 120seconds "
-                "before they get kicked. "
+                "Hadda waan af-xidhi doonaa dadka marka ay ku biiraan ilaa ay ka caddeeyaan in aanay ahayn bot.\nWaxay heli doonaan 120 ilbiriqsi "
+                "ka hor intaan la laadin. "
             )
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
