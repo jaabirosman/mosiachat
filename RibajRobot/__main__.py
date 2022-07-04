@@ -90,17 +90,17 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
 
 
-ZELDRIS_IMG = "https://telegra.ph/file/1fa00785f30375c0c1b50.jpg"
+ZELDRIS_IMG = "https://telegra.ph/file/d455373218f6e826f3ca4.jpg"
 
 PM_START_TEXT = """
-Hey there! my name is *{}*. 
-A modular group management bot with useful features. [ㅤ](https://telegra.ph/file/fed9ba09e9add9b197c21.png)
+Haye salaman! magacaygu waa *{}*. 
+Waxaan Ahay Bot ka Maamula Groups Ka Oona Leh Faa'iidooyin Badan. [🔝](https://telegra.ph/file/abe2032b564ca84c4fdc5.jpg)
 
 ◑ *Uptime:* `{}`
 ◑ `{}` *Users, across* `{}` *chats.*
 
-Any issues or need help related to me?
-Join our official group [IDNCoderX](https://t.me/IDNCoderX).
+Ma jiraan wax dhibaato ah ama u baahan caawimo la xidhiidha aniga?
+Join our official group [Osmani Help](https://t.me/osmanigroupbot).
 Click help button to know my commands!
 """
 
@@ -112,21 +112,21 @@ buttons = [
         ),
         InlineKeyboardButton(
             text="Updates 📢",
-            url="https://t.me/IDNCoder",
+            url="https://t.me/teamosmani",
         ),
     ],
     [
         InlineKeyboardButton(
-            text="Add Zeldris to Your Group 👥",
+            text="➗ Add to Your Group ➗",
             url="t.me/ZeldrisRobot?startgroup=true",
         ),
     ],
 ]
 
 HELP_STRINGS = f"""
-Hello there! My name is *{dispatcher.bot.first_name}*.
-I'm a modular group management bot with a few fun extras! Have a look at the following for an idea of some of \
-the things I can help you with.
+Salaamu calaykum! Magacaygu waa *{dispatcher.bot.first_name}*.
+Waxaan ahay bot maamul kooxeed modular ah oo leh dhawr madadaalo oo dheeri ah! Fiiri kuwan soo socda fikradda qaar ka mid ah \
+waxyaabaha aan kaa caawin karo.
 *Main* commands available:
 × /start: Starts me, can be used to check i'm alive or no...
 × /help: PM's you this message.
@@ -155,7 +155,7 @@ for module_name in ALL_MODULES:
     if imported_module.__mod_name__.lower() not in IMPORTED:
         IMPORTED[imported_module.__mod_name__.lower()] = imported_module
     else:
-        raise Exception("Can't have two modules with the same name! Please change one")
+        raise Exception("Ma yeelan karaan laba qaybood oo isku magac ah! Fadlan mid beddel")
 
     if hasattr(imported_module, "__help__") and imported_module.__help__:
         HELPABLE[imported_module.__mod_name__.lower()] = imported_module
@@ -255,7 +255,7 @@ def start(update: Update, context: CallbackContext):
     else:
         message.reply_photo(
             ZELDRIS_IMG,
-            caption="<b>Yes, I'm alive!\nHaven't sleep since</b>: <code>{}</code>".format(
+            caption="<b>Haa, waan noolahay!\nMa seexan tan iyo markaas</b>: <code>{}</code>".format(
                 uptime
             ),
             parse_mode=ParseMode.HTML,
@@ -263,12 +263,12 @@ def start(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="☎️ Support",
-                            url="https://t.me/IDNCoderX",
+                            text="🇸🇴 Support",
+                            url="https://t.me/osmanigroupbot",
                         ),
                         InlineKeyboardButton(
-                            text="Updates 📡",
-                            url="https://t.me/IDNCoder",
+                            text="Updates 🇸🇴",
+                            url="https://t.me/teamosmani",
                         ),
                     ]
                 ]
@@ -411,7 +411,7 @@ def get_help(update: Update, context: CallbackContext):
             )
             return
         update.effective_message.reply_text(
-            "Contact me in PM to get the list of possible commands.",
+            "ila soo xidhiidh @ribajosmani si aad u hesho liiska amarrada suurtogalka ah.",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -454,14 +454,14 @@ def send_settings(chat_id, user_id, user=False):
             )
             dispatcher.bot.send_message(
                 user_id,
-                "These are your current settings:" + "\n\n" + settings,
+                "Kuwani waa goobahaaga hadda:" + "\n\n" + settings,
                 parse_mode=ParseMode.MARKDOWN,
             )
 
         else:
             dispatcher.bot.send_message(
                 user_id,
-                "Seems like there aren't any user specific settings available :'(",
+                "Waxa ay u muuqataa in aanay jirin meelayn isticmaale gaar ah oo la heli karo :'(",
                 parse_mode=ParseMode.MARKDOWN,
             )
 
@@ -479,8 +479,8 @@ def send_settings(chat_id, user_id, user=False):
     else:
         dispatcher.bot.send_message(
             user_id,
-            "Seems like there aren't any chat settings available :'(\nSend this "
-            "in a group chat you're admin in to find its current settings!",
+            "Waxay u egtahay inaysan jirin wax dejinyo wada sheekaysi ah oo la heli karo :'(\nSoo dir tan "
+            "Wada sheekaysiga kooxeed ee aad maamulayso si aad u hesho dejinteeda hadda!",
             parse_mode=ParseMode.MARKDOWN,
         )
 
@@ -498,7 +498,7 @@ def settings_button(update: Update, context: CallbackContext):
             chat_id = mod_match.group(1)
             module = mod_match.group(2)
             chat = bot.get_chat(chat_id)
-            text = "*{}* has the following settings for the *{}* module:\n\n".format(
+            text = "*{}* waxay leedahay goobaha soo socda ee *{}* module:\n\n".format(
                 escape_markdown(chat.title), CHAT_SETTINGS[module].__mod_name__
             ) + CHAT_SETTINGS[module].__chat_settings__(chat_id, user.id)
             query.message.edit_text(
@@ -521,8 +521,8 @@ def settings_button(update: Update, context: CallbackContext):
             curr_page = int(prev_match.group(2))
             chat = bot.get_chat(chat_id)
             query.message.edit_text(
-                "Hi there! There are quite a few settings for {} - go ahead and pick what "
-                "you're interested in.".format(chat.title),
+                "Waa salaaman tahay! Waxaa jira dhowr habayn oo loogu talagalay {} - horay u soco oo soo qaado waxa "
+                "aad xiisaynayso.".format(chat.title),
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(
                         curr_page - 1, CHAT_SETTINGS, "stngs", chat=chat_id
@@ -535,8 +535,8 @@ def settings_button(update: Update, context: CallbackContext):
             next_page = int(next_match.group(2))
             chat = bot.get_chat(chat_id)
             query.message.edit_text(
-                "Hi there! There are quite a few settings for {} - go ahead and pick what "
-                "you're interested in.".format(chat.title),
+                "Waa salaaman tahay! Waxaa jira dhowr habayn oo loogu talagalay {} - horay u soco oo soo qaado waxa "
+                "aad xiisaynayso.".format(chat.title),
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(
                         next_page + 1, CHAT_SETTINGS, "stngs", chat=chat_id
@@ -548,8 +548,8 @@ def settings_button(update: Update, context: CallbackContext):
             chat_id = back_match.group(1)
             chat = bot.get_chat(chat_id)
             query.message.edit_text(
-                text="Hi there! There are quite a few settings for {} - go ahead and pick what "
-                "you're interested in.".format(escape_markdown(chat.title)),
+                text="Waa salaaman tahay! Waxaa jira dhowr habayn oo loogu talagalay {} - horay u soco oo soo qaado waxa "
+                "aad xiisaynayso.".format(escape_markdown(chat.title)),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)
@@ -577,7 +577,7 @@ def get_settings(update: Update, context: CallbackContext):
         send_settings(chat.id, user.id, True)
 
     elif is_user_admin(chat, user.id):
-        text = "Click here to get this chat's settings, as well as yours."
+        text = "Riix halkan si aad u hesho dejimaha wada sheekaysiga, iyo sidoo kale kaaga."
         msg.reply_text(
             text,
             reply_markup=InlineKeyboardMarkup(
@@ -594,7 +594,7 @@ def get_settings(update: Update, context: CallbackContext):
             ),
         )
     else:
-        "Click here to check your settings."
+        "Riix halkan si aad u hubiso dejimahaaga."
 
 
 def migrate_chats(update, _):
@@ -624,7 +624,7 @@ def is_chat_allowed(update, context):
         chat_id = update.effective_message.chat_id
         if chat_id not in WHITELIST_CHATS:
             context.bot.send_message(
-                chat_id=update.message.chat_id, text="Unallowed chat! Leaving..."
+                chat_id=update.message.chat_id, text="Sheeko aan la ogolayn! Tagitaanka..."
             )
             try:
                 context.bot.leave_chat(chat_id)
@@ -634,7 +634,7 @@ def is_chat_allowed(update, context):
         chat_id = update.effective_message.chat_id
         if chat_id in BLACKLIST_CHATS:
             context.bot.send_message(
-                chat_id=update.message.chat_id, text="Unallowed chat! Leaving..."
+                chat_id=update.message.chat_id, text="Sheeko aan la ogolayn! Tagitaanka..."
             )
             try:
                 context.bot.leave_chat(chat_id)
@@ -644,7 +644,7 @@ def is_chat_allowed(update, context):
         chat_id = update.effective_message.chat_id
         if chat_id in BLACKLIST_CHATS:
             context.bot.send_message(
-                chat_id=update.message.chat_id, text="Unallowed chat, leaving"
+                chat_id=update.message.chat_id, text="Sheeko aan la ogolayn! Tagitaanka"
             )
             try:
                 context.bot.leave_chat(chat_id)
@@ -688,7 +688,7 @@ def main():
     dispatcher.add_error_handler(error_handler)
 
     if WEBHOOK:
-        LOGGER.info("[Zeldris] Using webhooks.")
+        LOGGER.info("[RibajRobot] Using webhooks.")
         updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
 
         if CERT_PATH:
@@ -698,10 +698,10 @@ def main():
             client.run_until_disconnected()
 
     else:
-        LOGGER.info("[Zeldris] Using long polling.")
+        LOGGER.info("[RibajRobot] Isticmaalka codbixin dheer.")
         updater.start_polling(timeout=15, read_latency=4, drop_pending_updates=True)
         if MESSAGE_DUMP:
-            updater.bot.send_message(chat_id=MESSAGE_DUMP, text="I'm a Demon King...")
+            updater.bot.send_message(chat_id=MESSAGE_DUMP, text="Waxaan ahay Boqor Bots Ka...")
     if len(argv) not in (1, 3, 4):
         client.disconnect()
     else:
@@ -710,6 +710,6 @@ def main():
 
 
 if __name__ == "__main__":
-    LOGGER.info("[Zeldris] Successfully loaded modules: " + str(ALL_MODULES))
+    LOGGER.info("[RibajRobot] Successfully loaded modules: " + str(ALL_MODULES))
     client.start(bot_token=TOKEN)
     main()
